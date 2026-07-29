@@ -1,0 +1,84 @@
+name: Refresh data
+
+on:
+  schedule:
+    - cron: "7,37 * * * *"
+  workflow_dispatch:
+
+concurrency:
+  group: secure-feed-refresh
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check out public data
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Prepare private read-only access
+        env:
+          SOURCE_DEPLOY_KEY: ${{ secrets.SOURCE_DEPLOY_KEY }}
+        run: |
+          set -euo pipefail
+          test -n "$SOURCE_DEPLOY_KEY"
+          install -d -m 700 "$RUNNER_TEMP/ssh"
+          printf '%s\n' "$SOURCE_DEPLOY_KEY" > "$RUNNER_TEMP/ssh/key"
+          chmod 600 "$RUNNER_TEMP/ssh/key"
+          ssh-keyscan -t ed25519 github.com > "$RUNNER_TEMP/ssh/known_hosts"
+
+      - name: Check out private source
+        env:
+          GIT_SSH_COMMAND: ssh -i ${{ runner.temp }}/ssh/key -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile=${{ runner.temp }}/ssh/known_hosts
+        run: |
+          set -euo pipefail
+          git clone --depth 1 git@github.com:FortuneCat0884/tvs-private.git "$RUNNER_TEMP/source"
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install runtime dependencies
+        run: python -m pip install --disable-pip-version-check -r "$RUNNER_TEMP/source/requirements.txt"
+
+      - name: Run private regression tests
+        run: python -m unittest discover -s "$RUNNER_TEMP/source/tests" -v
+
+      - name: Rebuild encrypted public data
+        env:
+          RUNTIME_KEY: ${{ secrets.RUNTIME_KEY }}
+        run: |
+          set -euo pipefail
+          PYTHONPATH="$RUNNER_TEMP/source/tools" python "$RUNNER_TEMP/source/tools/update_secure_feed.py" \
+            --repo-root "$RUNNER_TEMP/source" \
+            --feed-dir "$GITHUB_WORKSPACE" \
+            --status-file "$RUNNER_TEMP/refresh-status.json"
+
+      - name: Verify encrypted public tree
+        env:
+          RUNTIME_KEY: ${{ secrets.RUNTIME_KEY }}
+        run: |
+          set -euo pipefail
+          PYTHONPATH="$RUNNER_TEMP/source/tools" python "$RUNNER_TEMP/source/tools/verify_secure_feed.py" \
+            --feed-dir "$GITHUB_WORKSPACE" \
+            --key-env RUNTIME_KEY
+
+      - name: Commit only real changes
+        run: |
+          set -euo pipefail
+          git add README.md manifest.json live_a.txt live_b.txt assets .github/workflows/refresh.yml
+          if git diff --cached --quiet; then
+            echo "No content change."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Refresh data"
+          git push origin HEAD:main

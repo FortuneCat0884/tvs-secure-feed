@@ -73,7 +73,7 @@ jobs:
       - name: Commit only real changes
         run: |
           set -euo pipefail
-          git add README.md manifest.json live_a.txt live_b.txt assets .github/workflows/refresh.yml
+          git add README.md manifest.json live_a.txt live_b.txt cdn.txt webview.txt webviewtv_apk.js assets .github/workflows/refresh.yml
           if git diff --cached --quiet; then
             echo "No content change."
             exit 0

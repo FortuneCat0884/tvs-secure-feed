@@ -1,18 +1,18 @@
 {
   "entries": {
     "a": {
-      "artifact": "assets/a-94a0b994abda4644.k9e",
-      "artifact_sha256": "57336d630f0215290478115f7db2b4f213ab832f0749dc94ac1f8b375f37ca73",
-      "core_sha256": "94a0b994abda46441a9ebb351b42a1ed54ffdfaf44be96481d1533baa1e3364f",
+      "artifact": "assets/a-eb36dd0f50d0f0d2.k9e",
+      "artifact_sha256": "54bc7ec9a5c6a37b61417aed458511d4214535bd3f5d096ee726629fe54dbb75",
+      "core_sha256": "eb36dd0f50d0f0d2ea7ca05167a3a5b9d0f5f5f78bd146b31818160b84cd9f20",
       "subscription": "live_a.txt",
-      "subscription_sha256": "d27997799ecae7c310ef3fbf814ca04403681fb8bf5454faf0ec090c79d0cea8"
+      "subscription_sha256": "ab732604aecd3e47551625d51b7269f4cacf0c37f77dc09c2343ee68c41028f0"
     },
     "b": {
       "artifact": "assets/b-65e13a89e9f735a9.k9e",
       "artifact_sha256": "54f7fb0420bdd6a28e06a630756ad3353a9bc20c4b9e9b2863e1244f1ad0e172",
       "core_sha256": "65e13a89e9f735a9031f9f43470a51ba0d80af7854c05c07b4ef50674cbee92b",
       "subscription": "live_b.txt",
-      "subscription_sha256": "640956526816d25602273bde774f5b56c237b59fb8525c24ec318e2633f9a5c1"
+      "subscription_sha256": "0d40d4cb081d26ea4737ee84ba48b52489c5cee65d9cf029c7632c7aa444f77e"
     }
   },
   "schema": 1

@@ -1,3 +1,3 @@
-# 学习研究项目
+# Study and Research Project
 
-本项目仅用于个人学习、技术研究与功能测试。请遵守所在地法律法规及相关服务条款，请勿用于商业用途或未经授权的传播。
+This project is intended solely for personal learning, technical research, and functional testing. Please comply with all applicable laws, regulations, and relevant terms of service. Do not use this project for commercial purposes or unauthorized distribution.

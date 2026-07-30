@@ -5,7 +5,7 @@
       "artifact_sha256": "54bc7ec9a5c6a37b61417aed458511d4214535bd3f5d096ee726629fe54dbb75",
       "core_sha256": "eb36dd0f50d0f0d2ea7ca05167a3a5b9d0f5f5f78bd146b31818160b84cd9f20",
       "subscription": "live_a.txt",
-      "subscription_sha256": "ab732604aecd3e47551625d51b7269f4cacf0c37f77dc09c2343ee68c41028f0"
+      "subscription_sha256": "1735d2d3b5a615827762337e4e72425ad1c4393f6284d0bd03cef271b5bda5f3"
     },
     "b": {
       "artifact": "assets/b-65e13a89e9f735a9.k9e",

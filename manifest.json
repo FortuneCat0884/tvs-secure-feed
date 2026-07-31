@@ -8,11 +8,16 @@
       "subscription_sha256": "1735d2d3b5a615827762337e4e72425ad1c4393f6284d0bd03cef271b5bda5f3"
     },
     "b": {
-      "artifact": "assets/b-65e13a89e9f735a9.k9e",
-      "artifact_sha256": "54f7fb0420bdd6a28e06a630756ad3353a9bc20c4b9e9b2863e1244f1ad0e172",
-      "core_sha256": "65e13a89e9f735a9031f9f43470a51ba0d80af7854c05c07b4ef50674cbee92b",
+      "artifact": "assets/b-6cd5bb674e10f513.k9e",
+      "artifact_sha256": "47519c9beaca0f60e2f84f5b7aee43b4ac12d776b53fe55c68196baa78eac228",
+      "core_sha256": "6cd5bb674e10f5136d9ef391f37970520754f0243748a40467a6376e55635968",
       "subscription": "live_b.txt",
-      "subscription_sha256": "0d40d4cb081d26ea4737ee84ba48b52489c5cee65d9cf029c7632c7aa444f77e"
+      "subscription_sha256": "a4d411739d39f46d5c6825c483ad624c0874d6d715aa18c4ff8e6e14a649e5af"
+    },
+    "bf": {
+      "artifact": "assets/bf-c26a3891244c6fa1.k9j",
+      "artifact_sha256": "99d0081c37df7aa7c699faffecf7ded760569ba4a4b23834944660cd72fa6bb0",
+      "payload_sha256": "c26a3891244c6fa15d82c165ae7730a8da70928270570c73b51c19161459fd8e"
     }
   },
   "schema": 1
